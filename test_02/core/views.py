@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from core.models import Category,Product,ProductImages
 
+
  
 def index(request):
     products=Product.objects.filter(product_status="published",featured=True).order_by("-id")
@@ -19,6 +20,8 @@ def prd(request):
 
 def cat(request):
     Categories= Category.objects.all()
+    
+
     context={
         "categories":Categories
     }
