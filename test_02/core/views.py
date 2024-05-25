@@ -20,9 +20,23 @@ def prd(request):
 
 def cat(request):
     Categories= Category.objects.all()
-    
+
 
     context={
         "categories":Categories
     }
     return render (request,'core/cat01.html',context)
+
+def cat_view(request, cid):
+    # Get the category object based on the provided cid
+    category = Category.objects.get(cid=cid)
+    
+    # Filter products by the retrieved category object
+    products = Product.objects.filter(product_status="published", Category=category)
+    
+    context = {
+        "category": category,  # Passing the category object to the template
+        "products": products,
+    }
+
+    return render(request, "core/catls.html", context)
