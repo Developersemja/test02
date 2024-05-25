@@ -12,9 +12,10 @@ STATUS={
 }
 
 def user_directory_path(instance,filename):
-    return 'user_{0}/{1}'.format(instance.user.id)
+    return 'user_{0}/{1}'.format(instance.user.id ,filename)
 
 class Category(models.Model):
+    user = models.ForeignKey(User, on_delete=models.SET_NULL,null=True)
     cid =ShortUUIDField(unique=True, length=10 , max_length=30, prefix="test", alphabet="SRE0123456789")
     title = models.CharField(max_length=100,default="Title")
     image = models.ImageField(upload_to=user_directory_path,default="image jpg ")
@@ -31,7 +32,7 @@ class Product (models.Model):
     image = models.ImageField(upload_to=user_directory_path,default="image jpg ")
     description = models.TextField(null=True,blank=True,default="Description")
     user = models.ForeignKey(User, on_delete=models.SET_NULL,null=True)
-    Category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True,default="product category")
+    Category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True,default="product category",related_name="category")
     price = models.DecimalField(max_digits=999999999, decimal_places=2 ,default="0.00")
     specification = models.TextField(null=True,blank=True,default="Description") 
     product_status = models.CharField(choices=STATUS,max_length=10,default="in_review")

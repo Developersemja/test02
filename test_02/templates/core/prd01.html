@@ -12,13 +12,12 @@
     {% endfor %}
 {% endif %}
 
-    <a href="{% url 'userauths:sign-out' %}">Logout</a>
-    <h1 class="red">Test website</h1>
-
-    <div class="test" style="display: flex;align-items: center;flex-direction: column;">
+  
+<div class="test" style="display: flex;align-items: center;flex-direction: column;">
     {% for p in products %}
-    <img src="{{ p.image.url }}" alt="" height="50" width="50">
-    <p>{{ p.title }} </p>
+        <img src="{{ p.image.url }}" alt="" height="50" width="50">
+        <p>{{ p.title }} {{ p.price }}</p>
+        <p></p>
     {% endfor %}
 </div>
 </body>
